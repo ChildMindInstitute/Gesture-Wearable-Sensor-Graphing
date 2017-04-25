@@ -80,8 +80,13 @@ void graphRoll(float inData, int[] graphBuffer, color c_color)
   // refresh data only is new serial data is arrived  
   if (timeOnce ==1)
   {
-    for (int i=0; i<posX-1; i++)  
+    for(int r = 0; r<10; r++){  //SPEED UP GRAPH
+    
+    for (int i=0; i<posX-1; i++){  
       graphBuffer[i] = graphBuffer[i+1];
+    }
+    
+    }
   }    
 
     
@@ -90,10 +95,11 @@ void graphRoll(float inData, int[] graphBuffer, color c_color)
   stroke(c_color);
   strokeWeight(2);
   // plot the graph that goes from right to left
+  //for(int i = 0; i<50; i++){  //SPEED UP GRAPH
   for (int x=posX; x>10; x--)
     line( x, posY-graphBuffer[x-1], x+1, posY-graphBuffer[x]);
     
-    
+  //}
     
   noStroke();
 }
@@ -112,18 +118,17 @@ void InitComDropdown()
   //Set the height of the bar itself.
   PortsList.setBarHeight(22);
   //Set the lable of the bar when nothing is selected.
-  PortsList.getCaptionLabel().set("COM port");
+  PortsList.captionLabel().set("COM port");
   //Set the top margin of the lable.
-  PortsList.getCaptionLabel().getStyle().marginTop = 3;
+  PortsList.captionLabel().style().marginTop = 3;
   //Set the left margin of the lable.
-  PortsList.getCaptionLabel().getStyle().marginLeft = 3;
+  PortsList.captionLabel().style().marginLeft = 3;
   //Set the top margin of the value selected.
-  PortsList.getValueLabel().getStyle().marginTop = 3;
+  PortsList.valueLabel().style().marginTop = 3;
   //Store the Serial ports in the string comList (char array).
-  comList = Serial.list();
+  comList = serial.list();
   
-  println((Object[])comList);
-  
+  println(comList);
   if (comList.length!=0)
   { 
     //We need to know how many ports there are, to know how many items to add to the list, so we will convert it to a String object (part of a class).
@@ -148,13 +153,14 @@ void InitComDropdown()
   PortsList.setColorActive(color(255,128));
 }
 
+
 // apre la seriale appena selezionata
 void controlEvent(ControlEvent theEvent) 
 {
   //select com from list 
-  if(theEvent.getName().equals("portComList"))   
+  if(theEvent.isGroup() && theEvent.name().equals("portComList"))   
   { 
-    comSelected = int(theEvent.getController().getValueLabel().getText());
+    comSelected = int(theEvent.group().value());
     println("Select portComList " + comSelected); // for debugging
     initCom=1;
     //InitSerial(theEvent.group().value()); // initialize the serial port selected    

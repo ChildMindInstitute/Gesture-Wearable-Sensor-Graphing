@@ -36,6 +36,11 @@ void clearGraph()
       VideoBuffer1[i] = -((max+min)/2)*height/(abs(max)+abs(min)); 
       VideoBuffer2[i] = -((max+min)/2)*height/(abs(max)+abs(min)); 
       VideoBuffer3[i] = -((max+min)/2)*height/(abs(max)+abs(min)); 
+      VideoBuffer4[i] = -((max+min)/2)*height/(abs(max)+abs(min)); 
+      VideoBuffer5[i] = -((max+min)/2)*height/(abs(max)+abs(min)); 
+      VideoBuffer6[i] = -((max+min)/2)*height/(abs(max)+abs(min)); 
+      VideoBuffer7[i] = -((max+min)/2)*height/(abs(max)+abs(min)); 
+      VideoBuffer8[i] = -((max+min)/2)*height/(abs(max)+abs(min)); 
      }   
 }  
 
@@ -118,6 +123,25 @@ void ParseString()
           label3 = trim(command[4]);  // eliminate \r\n chars
           println("min=" + min + " max=" + max + " lb1=" + label1 + " lb2=" + label2 + " lb3=" + label3);
          }       
+         
+        if (command.length > 5)  //mucho label
+        {
+          if ( (max>min) && abs(max)< 2000)
+          {
+            min = Integer.parseInt(command[0]);
+            max = Integer.parseInt(command[1]);
+          }
+          label1 = command[2];
+          label2 = command[3];
+          label3 = command[4];
+          label4 = command[5];
+          label5 = command[6];
+          label6 = command[7];
+          label7 = command[8];  // eliminate \r\n chars
+          label8 = trim(command[9]);  // eliminate \r\n chars
+          println("min=" + min + " max=" + max + " lb1=" + label1 + " lb2=" + label2 + " lb3=" + label3 + " lb4=" + label4 + " lb5=" + label5 + " lb6=" + label6 + " lb7=" + label7 + " lb8=" + label8);
+          //println("min=" + min + " max=" + max + " lb1=" + label1 + " lb2=" + label2 + " lb3=" + label3);
+         }   
     }
     else 
     {            
@@ -157,7 +181,38 @@ void ParseString()
           catch  (NumberFormatException e) { println("Error:" + e); }
           Value3 = constrain(num, min, max);          
           numOfGraph=3;
-        }            
+        }       
+           if  (data.length > 3)
+        {
+          //try  { num = Integer.parseInt(trim(data[0])); }
+          try { num = Float.parseFloat(trim(data[0])); }           
+          catch  (NumberFormatException e) { println("Error:" + e); }   
+          Value1 = constrain(num, min, max);          
+          //try  { num = Integer.parseInt(trim(data[1])); }
+          try { num = Float.parseFloat(trim(data[1])); }           
+          catch  (NumberFormatException e) { println("Error:" + e); }
+          Value2 = constrain(num, min, max);          
+          //try  { num = Integer.parseInt(trim(data[2])); }
+          try { num = Float.parseFloat(trim(data[2])); }           
+          catch  (NumberFormatException e) { println("Error:" + e); }
+          Value3 = constrain(num, min, max);  
+          try { num = Float.parseFloat(trim(data[3])); }           
+          catch  (NumberFormatException e) { println("Error:" + e); }
+          Value4 = constrain(num, min, max); 
+          try { num = Float.parseFloat(trim(data[4])); }           
+          catch  (NumberFormatException e) { println("Error:" + e); }
+          Value5 = constrain(num, min, max); 
+          try { num = Float.parseFloat(trim(data[5])); }           
+          catch  (NumberFormatException e) { println("Error:" + e); }
+          Value6 = constrain(num, min, max); 
+          try { num = Float.parseFloat(trim(data[6])); }           
+          catch  (NumberFormatException e) { println("Error:" + e); }
+          Value7 = constrain(num, min, max); 
+          try { num = Float.parseFloat(trim(data[7])); }           
+          catch  (NumberFormatException e) { println("Error:" + e); }
+          Value8 = constrain(num, min, max);         
+          numOfGraph=8;
+        }           
   }
 }  
   
